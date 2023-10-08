@@ -32,6 +32,8 @@
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
 \usepackage[scale=0.75]{geometry} % Reduce document margins
+
+\geometry{margin=2cm}
 %\setlength{\hintscolumnwidth}{3cm} % Uncomment to change the width of the dates column
 %\setlength{\makecvtitlenamewidth}{10cm} % For the 'classic' style, uncomment to adjust the width of the space allocated to your name
 
@@ -53,7 +55,7 @@
 \email{akshay.akshay@mail.mcgill.ca}
 %\homepage{staff.org.edu/~jsmith}{staff.org.edu/$\sim$jsmith} % The first argument is the url for the clickable link, the second argument is the url displayed in the template - this allows special characters to be displayed such as the tilde in this example
 %\extrainfo{additional information}
-\photo[70pt][0.4pt]{pictures/picture} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
+\photo[70pt][0.4pt]{pictures/Photo} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
 \quote{"Silence is the best teacher.."}
 
 %----------------------------------------------------------------------------------------
@@ -72,386 +74,50 @@
 
 \section{Current- PhD Computer Science}
 
-    Relaxed memory accesses are used to gain substantial improvement in the performance of concurrent programs. 
-    A relaxed consistency model specifically describes the semantics of such memory accesses for a particular programming language. 
-    Such models for high level languages as well as hardware have been prey to informal specifications, conflict with common program transformations essential for the performance, render compiler mappings incorrect and bringing in additional complexities like the infamous out-of-thin-air problem. 
-    To add to this, semantics of such models are quite un-intuitive and generally have a large learning curve for new-comers.
-    Our current focus is on identifying whether it is possible to formalize such models using program transformations. 
-    Having such a description in our eyes will make it intuitive enough for a larger audience to understand these models and make use of them wisely. 
-    In addition, we also want to investigate the advantage of having such models w.r.t compiler correctness, compositional  correctness, robustness, etc.
+    Shared memory semantics, also known as memory consistency models, specify how a concurrent program behaves. 
+    While sequential interleaving is considered as the de-facto way of reasoning with such programs, current hardware as well as software drift away from it significantly.
+    Semantics for them are termed as weak consistency models, allowing for more concurrent behaviors that result due to optimizations mainly understood as those done by hardware.
+    %signifying they allow behaviors that go beyond sequential reasoning.
+    While hardware models reflect desired optimizations, the same cannot be said for software models.
+    Software (compiler) optimizations have historically been designed for sequential programs, and thus, optimization choices sometimes interact badly with concurrent software.
+    This has resulted in software exhibiting unexpected concurrent behaviors, which makes software correctness a hard task to address. 
+    Existing solutions to this are too complex to be feasible in practice. 
+    They tend to either make code development difficult or limit the range of potential optimizations. 
+    This results in a trade-off between performance, as enabled by aggressive optimization, and the ability to ensure correctness of the optimized piece of software. 
+    %Weaker memory models do not allow \textit{more} compiler optimizations (transformations); seemingly harmless syntactic changes may also be unsafe.
+    %However, this \textit{`more'} may not be strict.
+    %Surprisingly, the implications of these memory models on the safety of compiler optimizations is unclear. 
+    %To add, existing semantics for programming language memory models allow unexpected behaviors of programs.
+    %Previous work shows that attempting to allow as many compiler optimizations as possible leads to more unexpected behaviors, the vice versa being disallowing unexpected behaviors inhibits us from doing potentially performance critical optimizations.
+    The goal of this PhD is to unveil a precise and practically useful correlation between memory consistency models and compiler optimizations. In this endeavor, we propose a new design methodology of memory models for software, one that places emphasis on the compiler optimizations desired to be performed. 
+    We intend to establish a system of formally constructing models that allow compilers to also do much of the performance-giving optimizations, without sacrificing correct functioning of software. 
+    %We believe this framework of designing memory consistency models is more friendly to compiler developers and also help in designing safe optimizations for a target memory model.
+
+
+\input{education.tex}
+
+
+\input{publications.tex}
+
+%----------------------------
+
+\input{talks.tex}
+
+%----------------------------
+
+\input{internships.tex}
+
+\input{projects.tex}
+
+\input{teaching.tex}
+
+\input{duties.tex}
+
+\input{awards.tex}
+
+\input{attendance.tex}    
 
 
 
-
-%----------------------------------------------------------------------------------------
-%	EDUCATION SECTION
-%----------------------------------------------------------------------------------------
-
-\section{Previous Education}
-
-\cventry{2018--2021}{Masters of Computer Science - Thesis}{McGill University}{Montreal}{}{}{
-    {
-        Courses Taken
-         \begin{multicols}{2}
-          \begin{enumerate}
-              \item Machine Learning (COMP 652) - Fall 2018
-              \item Teaching in Computer Science (COMP 598) - Fall 2018
-              \item Compiler Design (COMP 520) - Winter 2019
-              \item Epistemic \& Sociocultural Understanding of Computer Science (COMP 762) - Winter 2019 
-              \item Semantics of Programming Languages - Seminar course at University of Montreal (IFT 6172) - Fall 2019
-              \item Meta-Programming (COMP 596) - Winter 2020
-           \end{enumerate}
-           \end{multicols}
-          }
-}  % Arguments not required can be left empty
-\cventry{2014--2018}{Bachelor of Information Technology}{College of Engineering}{Pune}{}{}
-{
-    \textbf{Relevant} Courses Taken 
-    \begin{multicols}{2}
-    \begin{enumerate}
-        \item Data Structures and Algorithms - 2015
-        \item Digital Systems - 2015
-        \item Discrete Structures and Graph Theory - 2015
-        \item Microprocessor Techniques - 2016
-        \item Principles of Programming Languages - 2016
-        \item Theory of Computer Science -2016
-        \item Operating Systems - 2016
-        \item Algorithms and Complexity - 2017
-        \item Assemblers and Compilers - 2017
-    \end{enumerate}
-    \end{multicols}
-}
-
-\section{Masters Thesis}
-
-\cvitem{Title}{\emph{Analysis of the ECMAscript memory model: a program transformation perspective}}
-\cvitem{Supervisors}{Professor Clark Verbrugge}
-\cvitem{Abstract}{Concurrent programs have been shown to give us tremendous performance benefits compared to their sequential counterparts. 
-With the addition of several hardware features such as read/write buffers, speculation, etc., more efficient forms of concurrent memory accesses are introduced. 
-Known as relaxed memory accesses, they are used to gain substantial improvement in the performance of concurrent programs.
-A relaxed memory consistency model specifically describes the semantics of such accesses for a particular programming language. 
-Historically, such semantics are often ill-defined or misunderstood, and have been shown to conflict with common program transformations essential for the performance of programs. 
-In this thesis, we give a formal declarative (axiomatic) style description of the ECMAScript relaxed memory consistency model. 
-We analyze the impact of this model on two common program transformations, viz. instruction reordering and elimination. 
-We give a conservative proof under which such an optimization is allowed for relaxed memory accesses. 
-We use this result to reason about the validity of reordering accesses outside loops under the same model. 
-We conclude this thesis by eliciting the limitations of our approach, critique on the semantics of the model, possible future work using our results, and pending foundational questions that we discovered while working on this thesis.}
-
-%----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE SECTION
-%----------------------------------------------------------------------------------------
-
-\section{Publications}
-
-\cventry{2021}{Analysis of the ECMAScript Memory Model: A program transformation perspective}{McGill University}{Montreal}{Thesis}{\href{https://escholarship.mcgill.ca/concern/theses/7p88cn613?locale=en}{Link}}
-
-\cventry{2022}{Reordering Under the ECMAScript Memory Consistency Model}{Languages and Compilers for Parallel Computing (LCPC) 2020}{New York}{Conference}{\href{https://link.springer.com/chapter/10.1007/978-3-030-95953-1_14}{Paper}}
-
-
-\section{Research Internships}
-
-    \cventry{July 2020 - October 2020}{Research Fellow}{Max Planck Institute for Software Systems (MPI-SWS)}{Virtual}{Supervisor:  \textbf{Dr. Viktor Vafeiadis}}{Research Work link: : \href{https://github.com/jaag5678/MPI-Internship}{Symmetry Reduction for Model Checking Relaxed Memory programs}}{We investigate the advantage of using symmetry reduction to improve the performance of model checking relaxed memory programs. We identified programs that adhere to certain symmetries. We use these symmetries to prove equivalence between model-checking different symmetric executions of the same program. Such equivalences help us reduce the verification of concurrent program executions.}
-
-
-\section{Projects}
-
-    \subsection{Personal}
-
-        \cventry
-            {Summer 2017} %year
-            {Generic Lex (C++)} %project title
-            {Holidays (solo)} % Course 
-            {College of Engineering Pune} %Location
-            {Bachelors} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item A basic generic lexical analyzer to define any syntax whose grammar is given by the user in the form of many  regular expressions as input.
-                    \item First major exposure to actually implementing the concept of parsing. 
-                    \item Project Link : \href{https://github.com/jaag5678/Dragon.git}{GenLex}
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {Summer 2016} %year
-            {Automata Generator (C++)} %project title
-            {Holidays (solo)} % Course 
-            {College of Engineering Pune} %Location
-            {Bachelors} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item Automata generator used to define grammars in the form of regular expressions given by the user.
-                    \item Functionalities to convert from deterministic to non-deterministic automata and vice versa and verify if given input belongs to the grammar.
-                    \item First major exposure to coding in C++, using C++ templates and recursion style programming.
-                    \item Project Link : \href{https://github.com/jaag5678/TCS_App.git}{AutomataGen}
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {Summer 2016} %year
-            {Assembler for 8086 (C)} %project title
-            {Holidays (solo)} % Course 
-            {College of Engineering Pune} %Location
-            {Bachelors} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item A full fledged assembler for a subset of 8086 
-                    \item Involved around 10 instructions of 8086
-                \end{itemize}
-            }
-            {}
-
-    \subsection{Course-based}
-
-        \cventry
-            {Winter 2022} %year
-            {Constraint driven Scheduling of fine-grained C concurrency for Reconfigurable Hardware} %project title
-            {Course: High level Synthesis of Digital Systems -COMP 764 (Solo)} % Course 
-            {McGill University} %Location
-            {PhD} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                  \item Addressed the scheduling problem of HLS designs using fine grained concurrent constructs.
-                  \item Proposed an optimization to address resource constraints while synthesizing such designs as hardware.
-                  \item Project link: \href{https://github.com/jaag5678/COMP-764---HLS/tree/master/Project}{HLS-Project}.
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {Winter 2020} %year
-            {Kripke Style Interpretation of lambda circle} %project title
-            {Course: MetaProgramming Course project - COMP 596 (solo)} % Course 
-            {McGill University} %Location
-            {Masters} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item Attempted to represent the "next" temporal logic operator using Kripke Style semantics. 
-                    \item Experience in experimenting with the relation between modal logic and temporal logic. 
-                    \item Project report link: \href{https://www.overleaf.com/read/vycfvpgbvvrp}{KripkeLambdaCircle}.
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {Fall 2019} %year
-            {Extending Typer with Linear Types} %project title
-            {Course: Semantics of Programming Languages - IFT 6172 (solo)} % Course 
-            {University of Montreal} %Location
-            {Masters} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item Attempted to extend an existing language with Linear Types. 
-                    \item Gained experience reading compiler code written in OCAML. 
-                    \item Gained experience in working with Functional programming languages. 
-                    \item Project report link:\href{https://www.overleaf.com/read/vbmgfqzjkysk}{TyperExtLinearTypes}.
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {Winter 2019} %year
-            {Vocabulary and its Influence on Computer Science Research} %project title
-            {Course: Epistemic and Sociocultural Understanding of Computer Science - COMP 766 (solo)} % Course 
-            {McGill University} %Location
-            {Masters} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item Wrote a research paper that talks about how vocabulary in CS research helps in influencing CS education across different communities.
-                    \item Inspired by Pierre Bourdieu's work on "Reproduction in Education, Society and Culture".
-                    \item Link to paper : \href{https://www.overleaf.com/read/qpnksypscjhc}{Vocabulary in CS research and its Impact}
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {Winter 2019} %year
-            {Compiler for GoLite (OCAML)} %project title
-            {Course: Compiler Construction - COMP 520 (project of 2)} % Course 
-            {McGill University} %Location
-            {Masters} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item A full fledged compiler for a subset of GO language.
-                    \item Tremendous practical experience building each phase of compiler viz Lexical, Parsing, Semantics and Code gen. 
-                    \item Tremendous experience gained in using OCAML language to build the compiler.
-                    \item The target language was Python.
-                    \item Project Link with report: \href{https://github.com/comp520/2019_group15.git}{GoLite Compiler}.
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {Fall 2018} %year
-            {Foundations of Programming for Grade 6 students} %project title
-            {Course: Teaching in Computer Science - COMP 598 (project of 4)} % Course 
-            {McGill University} %Location
-            {Masters} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item Designed an entire course for grade 6 students for programming foundations
-                    \item Designed and presented lectures for a subset of the designed course throughout the term. 
-                    \item Designed rubrics to grade assignments and work done by peers on designing other computer science courses
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {Fall 2018} %year
-            {Predicting Compiler Optimizations in C (bash, C, Python)} %project title
-            {Course: Machine Learning - COMP 652 (solo)} % Course 
-            {McGill University} %Location
-            {Masters} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item Research based project wherein gcc compiler optimization levels were attempted to be predicted by training a simple machine learning model
-                    \item Data set was gathered from my own personal C programs written number theory and a few project euler problems.
-                    \item Experience gained in using autoencoders. 
-                    \item Experience gained in data mining for machine learning purposes. 
-                    \item Critical insights were gained on analysis of training data and predictions. 
-                    \item Project Link with report : \href{https://github.com/jaag5678/CompOptML.git}{Compiler Optimization Prediction}
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {2017-2018} %year
-            {Ontology Based Intrusion Detection System (SPARQL, Python)} %project title
-            {Course: Undergraduate Final Year (project of 3)} % Course 
-            {College of Engineering Pune} %Location
-            {Bachelors} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item Research based project involving building an proof of concept Intrusion Detection System (IDS) for a specific application layer based Denial of Service (DoS) attacks using HTTP protocol called as SlowDos.
-                    \item Experience gained in reading research papers, conducting exhaustive literature review and concretely defining research statement for our problem. 
-                    \item Research work link : \href{https://github.com/Chromares/IDS_Ontology.git}{Ontology-based IDS}.
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {2016} %year
-            {Interactive Debugger and Interpreter for 8086 (Python)} %project title
-            {Course: Principles of Programming Languages (project of 3)} % Course 
-            {College of Engineering Pune} %Location
-            {Bachelors} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item An interactive debugger for Assembly Language incorporated with GUI crafted using PyQT4 library.
-                    \item Involved around 20 instructions of the 8086 instruction set.
-                    \item Project Link : \href{https://github.com/jaag5678/visualemu8086}{Visualemu 8086}
-                \end{itemize}
-            }
-            {}
-
-        \cventry
-            {2015} %year
-            {Project Othello (C)} %project title
-            {Course: Data Structures (solo)} % Course 
-            {College of Engineering Pune} %Location
-            {Bachelors} 
-            {
-                \begin{itemize} % Description(s) of experience/contributions/knowledge
-                    \item First major programming project as a two player board game known as Othello (or Reversi).
-                    \item Common effective strategies of the game integrated as an AI opponent.
-                    \item Ncurses graphics library used for the visual aspects.
-                    \item Project Link : \href{https://github.com/jaag5678/Reverse-Rebirth.git}{Project Othello}.
-                \end{itemize}
-            }
-            {}
-        
-    
-\section{Teaching Experience}
-
-\subsection{Vocational}
-
-\cventry
-    {2012--Present}
-    {1\textsuperscript{st} Year Analyst}
-    {\textsc{Lehman Brothers}}
-    {Los Angeles}
-    {}
-    {Developed spreadsheets for risk analysis on exotic derivatives on a wide array of commodities (ags, oils, precious and base metals), managed blotter and secondary trades on structured notes, liaised with Middle Office, Sales and Structuring for bookkeeping.
-\newline{}\newline{}
-Detailed achievements:
-\begin{itemize}
-\item Learned how to make amazing coffee
-\item Finally determined the reason for \textsc{PC LOAD LETTER}:
-\begin{itemize}
-\item Paper jam
-\item Software issues:
-\begin{itemize}
-\item Word not sending the correct data to printer
-\item Windows trying to print in letter format
-\end{itemize}
-\item Coffee spilled inside printer
-\end{itemize}
-\item Broke the office record for number of kitten pictures in cubicle
-\end{itemize}}
-
-%------------------------------------------------
-
-\cventry{2011--2012}{Summer Intern}{\textsc{Lehman Brothers}}{Los Angeles}{}{Rated "truly distinctive" for Analytical Skills and Teamwork.}
-
-%------------------------------------------------
-
-\subsection{Miscellaneous}
-
-\cventry{2010--2011}{}{}{}{}{Spent some time finding myself. This was a courageous endeavour that didn't have a job title. It was quite important to my overall development though so I'm adding it to my CV. Also it explains the gap in my otherwise stellar CV.}
-
-\cventry{2009--2010}{Computer Repair Specialist}{Buy More}{Burbank}{}{Worked in the Nerd Herd and helped to solve computer problems. Allowed me to become expert in all forms of martial arts and weaponry.}
-
-%----------------------------------------------------------------------------------------
-%	AWARDS SECTION
-%----------------------------------------------------------------------------------------
-
-\section{Awards}
-
-\cvitem{2011}{School of Business Postgraduate Scholarship}
-\cvitem{2010}{Top Achiever Award -- Commerce}
-
-%----------------------------------------------------------------------------------------
-%	COMPUTER SKILLS SECTION
-%----------------------------------------------------------------------------------------
-
-\section{Computer skills}
-
-\cvitem{Basic}{\textsc{java}, Adobe Illustrator}
-\cvitem{Intermediate}{\textsc{python}, \textsc{html}, \LaTeX, OpenOffice, Linux, Microsoft Windows}
-\cvitem{Advanced}{Computer Hardware and Support}
-
-%----------------------------------------------------------------------------------------
-%	COMMUNICATION SKILLS SECTION
-%----------------------------------------------------------------------------------------
-
-\section{Communication Skills}
-
-\cvitem{2010}{Oral Presentation at the California Business Conference}
-\cvitem{2009}{Poster at the Annual Business Conference in Oregon}
-
-%----------------------------------------------------------------------------------------
-%	LANGUAGES SECTION
-%----------------------------------------------------------------------------------------
-
-\section{Languages}
-
-\cvitemwithcomment{English}{Mothertongue}{}
-\cvitemwithcomment{Spanish}{Intermediate}{Conversationally fluent}
-\cvitemwithcomment{Dutch}{Basic}{Basic words and phrases only}
-
-%----------------------------------------------------------------------------------------
-%	INTERESTS SECTION
-%----------------------------------------------------------------------------------------
-
-\section{Interests}
-
-\renewcommand{\listitemsymbol}{-~} % Changes the symbol used for lists
-
-\cvlistdoubleitem{Piano}{Chess}
-\cvlistdoubleitem{Cooking}{Dancing}
-\cvlistitem{Running}
-
-%----------------------------------------------------------------------------------------
 
 \end{document}
